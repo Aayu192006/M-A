@@ -2,6 +2,8 @@
 
 > **An AI-powered full-stack web application that predicts how the stock market will react to a Mergers & Acquisitions (M&A) announcement — before the deal closes.**
 
+🔗 **Live Demo:** [https://m-a-alpha.vercel.app](https://m-a-alpha.vercel.app)
+
 ---
 
 ## 🧠 What It Does
