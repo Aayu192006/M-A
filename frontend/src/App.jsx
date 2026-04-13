@@ -17,11 +17,13 @@ function App() {
   const handlePredict = async (formData) => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/predict', formData);
+      // Use environment variable for the API URL, fallback to localhost for development
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await axios.post(`${API_URL}/predict`, formData);
       setPredictionData(response.data);
     } catch (error) {
       console.error("Prediction failed", error);
-      alert("Uh oh! Could not connect to the model API. Ensure the backend server is running on port 8000.");
+      alert("Uh oh! Could not connect to the model API. Ensure the backend server is running.");
     }
     setLoading(false);
   };

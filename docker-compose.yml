@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ma_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    volumes:
+      # Syncs local code to container for instant updates without rebuilding
+      - ./backend:/app
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ma_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      # Points the frontend to the backend running locally
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      # Syncs local frontend code to container
+      - ./frontend:/app
+      # Prevents container's node_modules from being overwritten by local environment
+      - /app/node_modules
+    depends_on:
+      - backend
