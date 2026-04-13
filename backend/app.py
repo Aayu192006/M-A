@@ -13,8 +13,9 @@ app = FastAPI(title="M&A Prediction API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    # Adding the specific Vercel URL ensures full compatibility
+    allow_origins=["*", "https://m-a-alpha.vercel.app"],
+    allow_credentials=False, # Must be False when using wildcards
     allow_methods=["*"],
     allow_headers=["*"],
 )
